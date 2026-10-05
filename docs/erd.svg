@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<rect width="1280" height="800" fill="#f4f7fb"/>
+<style>text{font-family:Arial,sans-serif;fill:#172b4d}.field{font-size:15px}.label{font-size:13px;fill:#315781}.edge{fill:none;stroke:#50739a;stroke-width:2}</style>
+<text x="40" y="48" font-size="28" font-weight="bold">Blog API — entity relationship diagram</text>
+<text x="40" y="78" font-size="15">1 = one · * = many · 0..1 = optional · Post.tags is an optional many-to-many relation</text>
+<rect x="40" y="110" width="330" height="239" rx="10" fill="white" stroke="#9aafc8"/>
+<path d="M40 153 H370" stroke="#9aafc8"/>
+<text x="56" y="139" font-size="20" font-weight="bold">User</text>
+<text class="field" x="56" y="179">id: BigAutoField (PK)</text>
+<text class="field" x="56" y="204">email: EmailField (unique)</text>
+<text class="field" x="56" y="229">first_name, last_name: varchar(50)</text>
+<text class="field" x="56" y="254">is_active: bool = true</text>
+<text class="field" x="56" y="279">is_staff: bool = false</text>
+<text class="field" x="56" y="304">password, last_login (inherited)</text>
+<text class="field" x="56" y="329">is_superuser, groups, permissions</text>
+<rect x="490" y="110" width="340" height="264" rx="10" fill="white" stroke="#9aafc8"/>
+<path d="M490 153 H830" stroke="#9aafc8"/>
+<text x="506" y="139" font-size="20" font-weight="bold">Post</text>
+<text class="field" x="506" y="179">id: BigAutoField (PK)</text>
+<text class="field" x="506" y="204">author_id: FK User / CASCADE</text>
+<text class="field" x="506" y="229">title: varchar(200)</text>
+<text class="field" x="506" y="254">slug: SlugField (unique)</text>
+<text class="field" x="506" y="279">body: text</text>
+<text class="field" x="506" y="304">category_id: FK / nullable / SET_NULL</text>
+<text class="field" x="506" y="329">status: draft | published</text>
+<text class="field" x="506" y="354">created_at, updated_at: datetime</text>
+<rect x="950" y="110" width="290" height="139" rx="10" fill="white" stroke="#9aafc8"/>
+<path d="M950 153 H1240" stroke="#9aafc8"/>
+<text x="966" y="139" font-size="20" font-weight="bold">Category</text>
+<text class="field" x="966" y="179">id: BigAutoField (PK)</text>
+<text class="field" x="966" y="204">name: varchar(100), unique</text>
+<text class="field" x="966" y="229">slug: SlugField (unique)</text>
+<rect x="40" y="480" width="330" height="189" rx="10" fill="white" stroke="#9aafc8"/>
+<path d="M40 523 H370" stroke="#9aafc8"/>
+<text x="56" y="509" font-size="20" font-weight="bold">Comment</text>
+<text class="field" x="56" y="549">id: BigAutoField (PK)</text>
+<text class="field" x="56" y="574">post_id: FK Post / CASCADE</text>
+<text class="field" x="56" y="599">author_id: FK User / CASCADE</text>
+<text class="field" x="56" y="624">body: text</text>
+<text class="field" x="56" y="649">created_at: datetime</text>
+<rect x="490" y="510" width="340" height="164" rx="10" fill="white" stroke="#9aafc8"/>
+<path d="M490 553 H830" stroke="#9aafc8"/>
+<text x="506" y="539" font-size="20" font-weight="bold">Post.tags (join table)</text>
+<text class="field" x="506" y="579">id: BigAutoField (PK)</text>
+<text class="field" x="506" y="604">post_id: FK Post</text>
+<text class="field" x="506" y="629">tag_id: FK Tag</text>
+<text class="field" x="506" y="654">unique(post_id, tag_id)</text>
+<rect x="950" y="510" width="290" height="139" rx="10" fill="white" stroke="#9aafc8"/>
+<path d="M950 553 H1240" stroke="#9aafc8"/>
+<text x="966" y="539" font-size="20" font-weight="bold">Tag</text>
+<text class="field" x="966" y="579">id: BigAutoField (PK)</text>
+<text class="field" x="966" y="604">name: varchar(50), unique</text>
+<text class="field" x="966" y="629">slug: SlugField (unique)</text>
+<path class="edge" d="M370 175 H490"/>
+<text class="label" x="390" y="165">1</text>
+<text class="label" x="468" y="165">*</text>
+<path class="edge" d="M830 190 H950"/>
+<text class="label" x="846" y="180">*</text>
+<text class="label" x="914" y="180">0..1</text>
+<path class="edge" d="M200 349 V480"/>
+<text class="label" x="208" y="377">1</text>
+<text class="label" x="208" y="467">*</text>
+<path class="edge" d="M490 300 H425 V555 H370"/>
+<text class="label" x="472" y="291">1</text>
+<text class="label" x="382" y="546">*</text>
+<path class="edge" d="M655 374 V510"/>
+<text class="label" x="665" y="404">1</text>
+<text class="label" x="665" y="497">*</text>
+<path class="edge" d="M830 565 H950"/>
+<text class="label" x="847" y="555">*</text>
+<text class="label" x="930" y="555">1</text>
+<text x="40" y="755" font-size="14">User extends AbstractBaseUser + PermissionsMixin. Django creates the Post–Tag join table automatically.</text>
+</svg>
