@@ -1,9 +1,12 @@
-logs/
+/logs/*
+!/logs/.gitkeep
 .env
-env/
+/env/
 .venv/
-*.pyc
 __pycache__/
-db.sqlite3
+*.py[cod]
+*.sqlite3
 .DS_Store
 .ruff_cache/
+/staticfiles/
+.coverage
